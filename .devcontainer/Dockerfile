@@ -53,6 +53,10 @@ RUN apt-get update &&  DEBIAN_FRONTEND=noninteractive apt-get install -y -q \
   bc \
   u-boot-tools \
   python \
+  xinetd \
+  tftpd \
+  tftp \
+  universal-ctags
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -75,6 +79,12 @@ RUN adduser --disabled-password --gecos '' vivado && \
 COPY .devcontainer/accept-eula.sh /
 COPY .devcontainer/${PETA_RUN_FILE} /
 
+#config tftp server
+COPY .devcontainer/tftp.in /etc/xinetd.d/tftp
+RUN mkdir /tftpboot
+RUN chmod ugo+rw /tftpboot/
+RUN service xinetd restart
+
 # run the install
 RUN chmod a+rx /${PETA_RUN_FILE}
 RUN chmod a+rx /accept-eula.sh
@@ -83,16 +93,6 @@ RUN chmod 777 /tmp /opt/Xilinx
 RUN cd /tmp && \
   sudo -u vivado -i /accept-eula.sh /${PETA_RUN_FILE} /opt/Xilinx/petalinux
 RUN rm -f /${PETA_RUN_FILE} /accept-eula.sh
-
-#config tftp server
-RUN apt-get update &&  DEBIAN_FRONTEND=noninteractive apt-get install -y -q \
-  xinetd \
-  tftpd \
-  tftp
-COPY .devcontainer/tftp.in /etc/xinetd.d/tftp
-RUN mkdir /tftpboot
-RUN chmod ugo+rw /tftpboot/
-RUN service xinetd restart
 
 # make /bin/sh symlink to bash instead of dash:
 RUN echo "dash dash/sh boolean false" | debconf-set-selections
