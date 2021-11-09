@@ -7,16 +7,19 @@
 	"context": "..",
 
 	// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
-	"dockerFile": "../Dockerfile",
+	"dockerFile": "./Dockerfile",
 
+	"build": { "args": { "PETA_VERSION": "2020.2", "PETA_RUN_FILE": "petalinux-v2020.2-final-installer.run" } },
 	// Set *default* container specific settings.json values on container create.
 	"settings": {},
+
+	"runArgs": ["-ti", "--rm", "-v", "/tmp/.X11-unix:/tmp/.X11-unix", "-v", "${localEnv:HOME}/.Xauthority:/home/vivado/.Xauthority" ],
 	
 	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": []
+	"extensions": [],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	 "forwardPorts": [69],
 
 	// Uncomment the next line to run commands after the container is created - for example installing curl.
 	// "postCreateCommand": "apt-get update && apt-get install -y curl",
@@ -28,5 +31,5 @@
 	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
 
 	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "vscode"
+	 "remoteUser": "vivado",
 }
