@@ -175,7 +175,7 @@ CONFIG_SUBSYSTEM_EXTRA_DT_FILES=""
 #
 CONFIG_SUBSYSTEM_BOOTARGS_AUTO=y
 CONFIG_SUBSYSTEM_BOOTARGS_EARLYPRINTK=y
-CONFIG_SUBSYSTEM_BOOTARGS_GENERATED="console=ttyPS0,115200 earlycon root=/dev/ram0 rw"
+
 CONFIG_SUBSYSTEM_DEVICETREE_COMPILER_FLAGS="-@"
 # CONFIG_SUBSYSTEM_DTB_OVERLAY is not set
 # CONFIG_SUBSYSTEM_REMOVE_PL_DTB is not set
@@ -222,8 +222,8 @@ CONFIG_SUBSYSTEM_TFTPBOOT_DIR="/tftpboot"
 #
 # Firmware Version Configuration
 #
-CONFIG_SUBSYSTEM_HOSTNAME="zynq-generic"
-CONFIG_SUBSYSTEM_PRODUCT="zynq-generic"
+CONFIG_SUBSYSTEM_HOSTNAME="zedboard-petalinux-gpio"
+CONFIG_SUBSYSTEM_PRODUCT="zedboard-petalinux-gpio"
 CONFIG_SUBSYSTEM_FW_VERSION="1.00"
 
 #
@@ -234,7 +234,7 @@ CONFIG_YOCTO_MACHINE_NAME="zynq-generic"
 #
 # TMPDIR Location
 #
-CONFIG_TMP_DIR_LOCATION="/tmp/yocto/build/tmp"
+CONFIG_TMP_DIR_LOCATION="${PROOT}/build/tmp"
 
 #
 # Devtool Workspace Location
@@ -269,3 +269,4 @@ CONFIG_YOCTO_NETWORK_SSTATE_FEEDS_URL="http://petalinux.xilinx.com/sswreleases/r
 #
 CONFIG_USER_LAYER_0="${PROOT}/project-spec/meta-user"
 CONFIG_USER_LAYER_1=""
+CONFIG_SUBSYSTEM_BOOTARGS_GENERATED="console=ttyPS0,115200 earlycon root=/dev/ram0 rw"

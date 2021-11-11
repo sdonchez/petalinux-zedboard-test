@@ -13,7 +13,7 @@
 	// Set *default* container specific settings.json values on container create.
 	"settings": {},
 
-	"runArgs": ["-ti", "--rm", "-v", "/tmp/.X11-unix:/tmp/.X11-unix", "-v", "${localEnv:HOME}/.Xauthority:/home/vivado/.Xauthority" ],
+	"runArgs": ["-ti", "--rm"],
 	
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [],
@@ -29,7 +29,8 @@
 
 	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
 	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
-	//TODO: Add mount to common SStateCache DIR
+	"mounts": ["source=${localEnv:HOME}/SStateCache,target=/mnt/SStateCache,type=bind,consistency=cached"],
+	
 	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
 	 "remoteUser": "vivado",
 }
