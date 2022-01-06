@@ -21,7 +21,8 @@ Finally, this project utilizes a [Shared State Cache](https://wiki.yoctoproject.
 1. Within the directory, execute `petalinux-build` to build out the image.
 1. Execute `petalinux-package --boot --fsbl images/linux/zynq_fsbl.elf --fpga images/linux/system.bit --u-boot` to construct the boot image for the platform.
 1. Format an SD card for the zedboard (if you don't already have one prepared), per the [Xilinx Instructions](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842385/How+to+format+SD+card+for+SD+boot)
-1. Copy the image files (`BOOT.bin` and `Image.ub`) from the `images/linux` directory onto the SD card.
+1. Copy the image files (`BOOT.bin` and `Image.ub`) from the `images/linux` directory onto the boot partition of the SD card.
+1. Extract the Root File System (`rootfs.cpio.gz`, or any of the other formats) from the `images/linux` directory to the ext4 partition. For the `cpio.gz` file, the command `tar -xf [file name] [destination]` will perform the extraction.
 1. Ensure the ZedBoard is configured for SD boot, per the [ZedBoard Hardware User's Guide](https://digilent.com/reference/_media/zedboard:zedboard_ug.pdf). Specifically, see Table 18. Connect a USB cable to the UART port of the ZedBoard, and connect to it via the serial console of your choice. The author utilized [PuTTY](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjbgPbPp4_0AhXvz4UKHaSuBOMQFnoECAMQAQ&url=https%3A%2F%2Fwww.putty.org%2F&usg=AOvVaw0iOGrunharr0YuZtN9wsn1).
 1. Insert the SD Card and power on the ZedBoard. The system should boot up, displaying output in the serial console.
 1. Log in with the username/password combination root/root
